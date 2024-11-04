@@ -56,33 +56,11 @@ export default (env: EnvVariable): Configuration => {
         },
       },
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.s[ac]ss|css$/i,
         use: [
-          isProd ? {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: "/",
-            },
-          } : "style-loader",
-          {
-            loader: "css-loader",
-            options: {
-              modules: {
-                localIdentName: isProd ? '[hash:base64:8]' : '[path][name]__[local]',
-              },
-              sourceMap: !isProd,
-            }
-          },
-          {
-            loader: "postcss-loader",
-            options: {
-              sourceMap: !isProd,
-              postcssOptions: {
-                plugins: isProd ? ["autoprefixer"] : [],
-              }
-            }
-          },
-          "resolve-url-loader",
+          'style-loader',
+          'css-loader',
+          'postcss-loader',
         ]
       },
       {
